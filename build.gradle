@@ -16,19 +16,25 @@ repositories {
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
 
-    implementation "io.ktor:ktor-gson:$ktor_version"
+    implementation "org.flywaydb:flyway-core:6.1.4"
+
+    implementation "io.ktor:ktor-jackson:$ktor_version"
     implementation "io.ktor:ktor-server-core:$ktor_version"
     implementation "io.ktor:ktor-server-netty:$ktor_version"
+    implementation "io.ktor:ktor-metrics-micrometer:$ktor_version"
+
 
     implementation "org.koin:koin-ktor:$koin_version"
     implementation "org.koin:koin-core:$koin_version"
     implementation "org.koin:koin-logger-slf4j:$koin_version"
 
-
-    implementation "com.h2database:h2:1.4.195"
     implementation "com.zaxxer:HikariCP:3.4.1"
-    implementation "ch.qos.logback:logback-classic:1.2.1"
+    implementation "com.h2database:h2:1.4.195"
+    implementation "ch.qos.logback:logback-classic:1.2.3"
+    implementation "com.viartemev:ktor-flyway-feature:1.0.0"
+    implementation "io.github.microutils:kotlin-logging:1.7.7"
     implementation "org.springframework:spring-jdbc:5.2.2.RELEASE"
+    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.9.9'
 
     testCompile group: 'junit', name: 'junit', version: '4.12'
 }
