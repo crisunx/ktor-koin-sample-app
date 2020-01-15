@@ -10,5 +10,6 @@
     </root>
 
     <logger name="io.netty" level="INFO"/>
-    <logger name="org.eclipse.jetty" level="INFO"/>
+    <logger name="br.com.crisun" level="INFO"/>
+    <logger name="com.zaxxer.hikari" level="INFO"/>
 </configuration>

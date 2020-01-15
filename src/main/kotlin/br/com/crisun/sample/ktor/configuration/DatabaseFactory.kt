@@ -10,7 +10,7 @@ object DatabaseFactory {
         config.driverClassName = "org.h2.Driver"
         config.jdbcUrl = "jdbc:h2:file:/tmp/test"
         config.maximumPoolSize = 10
-        config.isAutoCommit = false
+        config.isAutoCommit = true
         config.transactionIsolation = "TRANSACTION_REPEATABLE_READ"
         config.validate()
         return HikariDataSource(config)
