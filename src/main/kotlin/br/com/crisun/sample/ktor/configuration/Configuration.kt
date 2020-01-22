@@ -1,7 +1,9 @@
 package br.com.crisun.sample.ktor.configuration
 
 import br.com.crisun.sample.ktor.di.appModule
-import br.com.crisun.sample.ktor.root
+import br.com.crisun.sample.ktor.exception.BaseHttpException
+import br.com.crisun.sample.ktor.util.DatabaseCheck
+import br.com.crisun.sample.ktor.util.HealthCheck
 import com.fasterxml.jackson.annotation.JsonInclude
 import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.databind.ObjectMapper
@@ -10,29 +12,54 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.viartemev.ktor.flyway.FlywayFeature
 import io.ktor.application.Application
+import io.ktor.application.call
 import io.ktor.application.install
-import io.ktor.features.CallLogging
-import io.ktor.features.Compression
-import io.ktor.features.ContentNegotiation
-import io.ktor.features.DefaultHeaders
+import io.ktor.features.*
 import io.ktor.http.ContentType
+import io.ktor.http.HttpStatusCode
 import io.ktor.jackson.JacksonConverter
 import io.ktor.jackson.jackson
+import io.ktor.response.respond
 import io.ktor.routing.routing
-import org.koin.Logger.slf4jLogger
-import org.koin.ktor.ext.Koin
+import io.ktor.util.KtorExperimentalAPI
+import java.time.ZonedDateTime
 import java.util.*
+import javax.sql.DataSource
+import org.koin.Logger.slf4jLogger
+import org.koin.dsl.module
+import org.koin.ktor.ext.Koin
+import org.koin.ktor.ext.inject
 
+@KtorExperimentalAPI
 fun Application.module() {
+    val data by inject<DataSource>()
+    val databaseCheck by inject<DatabaseCheck>()
+    val ktorModule = module { single { environment } }
+
     install(CallLogging)
     install(Compression)
+    install(HealthCheck) {
+        check("database") { databaseCheck.doHealthCheck() }
+    }
     install(DefaultHeaders)
     install(Koin) {
         slf4jLogger()
-        modules(appModule)
+        modules(listOf(ktorModule, appModule))
+    }
+    install(StatusPages) {
+        exception<BaseHttpException> {
+            call.respond(
+                HttpStatusCode.fromValue(it.httpStatus),
+                mapOf(
+                    "status" to it.httpStatus,
+                    "message" to (it.message ?: ""),
+                    "timestamp" to ZonedDateTime.now().toString()
+                )
+            )
+        }
     }
     install(FlywayFeature) {
-        dataSource = DatabaseFactory.hikari()
+        dataSource = data
     }
     install(ContentNegotiation) {
         jackson {
