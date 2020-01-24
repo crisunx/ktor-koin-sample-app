@@ -1,0 +1,11 @@
+version: '3.6'
+
+services:
+  ktor:
+    build: .
+    image: crisun/ktor-sample-app
+    container_name: ktor
+    environment:
+      - TZ=America/Sao_Paulo
+    ports:
+      - "8080:8080"
