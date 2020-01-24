@@ -59,7 +59,7 @@ Delete message:
 ```sh
 curl -i -XDELETE -H 'Content-Type: application/json' "http://localhost:8080/message/1"
 ```
-Excluir uma rotina:
+Health check:
 ```sh
 curl -i "http://localhost:8080/health"
 ```
