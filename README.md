@@ -66,19 +66,11 @@ curl -i "http://localhost:8080/health"
 
 ## Libraries
 Koin: https://insert-koin.io
-
 flywaydb: https://flywaydb.org
-
 Logback: http://logback.qos.ch
-
 Spring Jdbc: https://spring.io
-
 h2database: https://www.h2database.com
-
 H2 Database: https://www.h2database.com
-
 HikariCP: https://github.com/brettwooldridge/HikariCP
-
 Kotlin Logging: https://github.com/MicroUtils/kotlin-logging
-
 Ktor flyway feature: https://github.com/viartemev/ktor-flyway-feature
