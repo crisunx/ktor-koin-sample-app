@@ -31,7 +31,7 @@ import org.koin.ktor.ext.inject
 
 @KtorExperimentalAPI
 fun Application.module() {
-    val data by inject<DataSource>()
+    val dataSource by inject<DataSource>()
     val databaseCheck by inject<DatabaseCheck>()
     val ktorModule = module { single { environment } }
 
@@ -59,7 +59,7 @@ fun Application.module() {
         }
     }
     install(FlywayFeature) {
-        dataSource = data
+        this.dataSource = dataSource
     }
     install(ContentNegotiation) {
         jackson {
