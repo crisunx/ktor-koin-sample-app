@@ -12,9 +12,9 @@ import org.springframework.jdbc.core.JdbcTemplate
 
 @KtorExperimentalAPI
 val appModule = module {
-    single<MessageRepository>()
-    single<MessageService>()
     single<DatabaseCheck>()
+    single<MessageService>()
+    single<MessageRepository>()
     single { JdbcTemplate(get()) }
     single<DataSource> { DatabaseConfiguration(get()).dataSource() }
 }

@@ -25,7 +25,6 @@ import io.ktor.util.KtorExperimentalAPI
 import java.time.ZonedDateTime
 import java.util.*
 import javax.sql.DataSource
-import org.koin.Logger.slf4jLogger
 import org.koin.dsl.module
 import org.koin.ktor.ext.Koin
 import org.koin.ktor.ext.inject
@@ -38,13 +37,14 @@ fun Application.module() {
 
     install(CallLogging)
     install(Compression)
-    install(HealthCheck) {
-        check("database") { databaseCheck.doHealthCheck() }
-    }
     install(DefaultHeaders)
     install(Koin) {
-        slf4jLogger()
-        modules(listOf(ktorModule, appModule))
+        modules(
+            listOf(ktorModule, appModule)
+        )
+    }
+    install(HealthCheck) {
+        check("status") { databaseCheck.doHealthCheck() }
     }
     install(StatusPages) {
         exception<BaseHttpException> {

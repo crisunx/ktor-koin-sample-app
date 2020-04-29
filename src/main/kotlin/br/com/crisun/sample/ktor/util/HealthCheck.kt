@@ -34,6 +34,7 @@ class HealthCheck(private val config: Configuration) {
             }
 
             call.respondText(checksResultsToJSON(checks), ContentType.Application.Json, HttpStatusCode.OK)
+
             finish()
         }
     }
