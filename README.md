@@ -41,7 +41,7 @@ Running manually:
 java -jar ktor-koin-sample-app-1.0.0-all.jar
 ```
 
-## Example of use
+## Examples
 
 Start the application and call the operations:
 
@@ -77,7 +77,7 @@ curl -i "http://localhost:8080/health"
 ## Libraries
 Koin: https://insert-koin.io
 
-flywaydb: https://flywaydb.org
+Flywaydb: https://flywaydb.org
 
 Logback: http://logback.qos.ch
 
