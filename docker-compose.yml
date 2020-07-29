@@ -3,7 +3,7 @@ version: '3.6'
 services:
   ktor:
     build: .
-    image: crisun/ktor-sample-app
+    image: mentoring/todo-list-bff
     container_name: ktor
     environment:
       - TZ=America/Sao_Paulo

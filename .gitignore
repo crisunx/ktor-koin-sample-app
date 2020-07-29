@@ -1,18 +1,10 @@
-build/
-classes/
-logs/
-.idea/
-.gradle/
-.settings/
-*.iml
-.classpath
-.project
-out/
 /.gradle
-src/main/gradle/
-src/main/.gradle/
-src/test/gradle/
-src/test/.gradle/
-src/*/gradlew
-src/*/gradle.bat
+/.idea
+/out
+/build
+*.iml
+*.ipr
+*.iws
 
+# Ktlint
+ktlint-report-in-checkstyle-format.xml
