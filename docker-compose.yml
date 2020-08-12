@@ -3,8 +3,8 @@ version: '3.6'
 services:
   ktor:
     build: .
-    image: mentoring/todo-list-bff
-    container_name: ktor
+    image: crisun/todo-list-bff
+    container_name: todo-list-bff
     environment:
       - TZ=America/Sao_Paulo
     ports:

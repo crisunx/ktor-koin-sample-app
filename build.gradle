@@ -29,6 +29,7 @@ repositories {
         implementation "org.flywaydb:flyway-core:6.5.0"
         implementation "org.codehaus.janino:janino:3.1.2"
         implementation "ch.qos.logback:logback-classic:1.2.3"
+
         implementation "com.viartemev:ktor-flyway-feature:1.0.0"
         implementation "org.springframework:spring-jdbc:5.2.2.RELEASE"
 
