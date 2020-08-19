@@ -3,6 +3,7 @@ package br.com.crisun.sample.todo.configuration
 import br.com.crisun.sample.todo.di.appModule
 import br.com.crisun.sample.todo.di.authModule
 import br.com.crisun.sample.todo.di.jsonModule
+import br.com.crisun.sample.todo.exception.NotFoundException
 import br.com.crisun.sample.todo.routes.auth
 import br.com.crisun.sample.todo.routes.health
 import br.com.crisun.sample.todo.routes.todo
