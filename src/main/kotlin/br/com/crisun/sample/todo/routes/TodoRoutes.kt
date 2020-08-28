@@ -12,9 +12,11 @@ import io.ktor.request.receiveOrNull
 import io.ktor.response.respond
 import io.ktor.routing.*
 import io.ktor.util.pipeline.PipelineContext
+import kotlinx.serialization.ExperimentalSerializationApi
 import org.koin.ktor.ext.inject
 import java.lang.NumberFormatException
 
+@ExperimentalSerializationApi
 fun Routing.todo() {
     val service by inject<TaskService>()
 

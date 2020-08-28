@@ -10,7 +10,6 @@ import br.com.crisun.sample.todo.service.UserService
 import br.com.crisun.sample.todo.util.Md5Sum
 import io.ktor.util.KtorExperimentalAPI
 import kotlinx.serialization.json.Json
-import kotlinx.serialization.json.JsonConfiguration
 import org.koin.dsl.module
 import org.koin.experimental.builder.single
 import org.springframework.jdbc.core.JdbcTemplate
@@ -37,6 +36,8 @@ val authModule = module {
 
 val jsonModule = module {
     single {
-        Json(JsonConfiguration.Stable.copy(ignoreUnknownKeys = true))
+        Json {
+            ignoreUnknownKeys = true
+        }
     }
 }

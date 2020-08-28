@@ -15,14 +15,12 @@ import io.ktor.auth.authentication
 import io.ktor.auth.jwt.JWTPrincipal
 import io.ktor.auth.jwt.jwt
 import io.ktor.features.*
-import io.ktor.http.HttpHeaders
-import io.ktor.http.HttpMethod
-import io.ktor.http.HttpStatusCode
+import io.ktor.http.*
 import io.ktor.response.respond
 import io.ktor.routing.routing
 import io.ktor.serialization.json
 import io.ktor.util.KtorExperimentalAPI
-import kotlinx.serialization.json.JsonConfiguration
+import kotlinx.serialization.json.Json
 import org.koin.ktor.ext.Koin
 import org.koin.ktor.ext.inject
 import org.slf4j.event.Level
@@ -57,9 +55,10 @@ fun Application.module() {
 
     install(ContentNegotiation) {
         json(
-            json = JsonConfiguration.Stable.copy(
+            contentType = ContentType.Application.Json,
+            json = Json {
                 ignoreUnknownKeys = true
-            )
+            }
         )
     }
 
@@ -68,8 +67,9 @@ fun Application.module() {
             call.respond(HttpStatusCode.InternalServerError, "Internal Server Error")
             throw cause
         }
-        exception<NotFoundException> {
+        exception<NotFoundException> { cause ->
             call.respond(HttpStatusCode.NotFound)
+            throw cause
         }
     }
 

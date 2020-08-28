@@ -11,21 +11,20 @@ import io.ktor.server.testing.handleRequest
 import io.ktor.server.testing.setBody
 import io.ktor.server.testing.withTestApplication
 import io.ktor.util.KtorExperimentalAPI
-import kotlinx.serialization.json.Json
-import kotlinx.serialization.json.JsonConfiguration
-import kotlinx.serialization.json.JsonLiteral
-import kotlinx.serialization.json.JsonObject
+import kotlinx.serialization.ExperimentalSerializationApi
+import kotlinx.serialization.decodeFromString
+import kotlinx.serialization.json.*
 import org.junit.Before
 import org.junit.Test
 import org.koin.test.AutoCloseKoinTest
 import kotlin.test.assertEquals
 
 class TodoRoutesTest : AutoCloseKoinTest() {
-    private val json = Json(JsonConfiguration.Stable.copy(ignoreUnknownKeys = true))
+    private val json = Json { ignoreUnknownKeys = true }
 
     @Before
     fun setUp() {
-        System.setProperty("SECRET", "ayla")
+        System.setProperty("SECRET", "crisun")
     }
 
     @Test
@@ -84,7 +83,7 @@ class TodoRoutesTest : AutoCloseKoinTest() {
             ) {
                 assertEquals(HttpStatusCode.Created, response.status())
 
-                task = json.parse(Task.serializer(), response.content.toString())
+                task = json.decodeFromString(Task.serializer(), response.content.toString())
             }
 
             with(
@@ -100,6 +99,7 @@ class TodoRoutesTest : AutoCloseKoinTest() {
     }
 
     @KtorExperimentalAPI
+    @ExperimentalSerializationApi
     @Test(expected = NotFoundException::class)
     fun `Try to update todo with error`() {
         var task: Task
@@ -126,7 +126,7 @@ class TodoRoutesTest : AutoCloseKoinTest() {
             ) {
                 assertEquals(HttpStatusCode.Created, response.status())
 
-                task = json.parse(Task.serializer(), response.content.toString())
+                task = json.decodeFromString(Task.serializer(), response.content.toString())
             }
 
             with(
@@ -136,7 +136,7 @@ class TodoRoutesTest : AutoCloseKoinTest() {
                     setBody("""{"id":${task.id},"title":"Tarefa Alterada","description":"Arrumar a casa 2"}""")
                 }
             ) {
-                assertEquals(HttpStatusCode.OK, response.status())
+                assertEquals(HttpStatusCode.NotFound, response.status())
             }
         }
     }
@@ -157,6 +157,8 @@ class TodoRoutesTest : AutoCloseKoinTest() {
                 assertEquals(HttpStatusCode.Created, response.status())
 
                 token = parseToken(response.content.toString())
+
+                println(token)
             }
 
             with(
@@ -168,7 +170,7 @@ class TodoRoutesTest : AutoCloseKoinTest() {
             ) {
                 assertEquals(HttpStatusCode.Created, response.status())
 
-                task = json.parse(Task.serializer(), response.content.toString())
+                task = json.decodeFromString(Task.serializer(), response.content.toString())
             }
 
             with(
@@ -246,7 +248,7 @@ class TodoRoutesTest : AutoCloseKoinTest() {
             ) {
                 assertEquals(HttpStatusCode.Created, response.status())
 
-                task = json.parse(Task.serializer(), response.content.toString())
+                task = json.decodeFromString(Task.serializer(), response.content.toString())
             }
 
             with(
@@ -333,6 +335,5 @@ class TodoRoutesTest : AutoCloseKoinTest() {
         }
     }
 
-    private fun parseToken(content: String) =
-        ((json.parseJson(content) as JsonObject)["token"] as JsonLiteral).body.toString()
+    private fun parseToken(content: String) = json.decodeFromString<JsonObject>(content)["token"]?.jsonPrimitive?.content ?: ""
 }

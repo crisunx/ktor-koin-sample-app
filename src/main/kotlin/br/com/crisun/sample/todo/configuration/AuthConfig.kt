@@ -23,7 +23,7 @@ open class AuthConfig(private val json: Json, private val config: Configuration)
         .withSubject(user.id.toString())
         .withIssuer(config.fetchProperty(JWT_ISSUER_KEY))
         .withAudience(config.fetchProperty(JWT_AUDIENCE_KEY))
-        .withClaim("user", json.stringify(User.serializer(), user.copy(password = "")))
+        .withClaim("user", json.encodeToString(User.serializer(), user.copy(password = "")))
         .sign(algorithm)
 
     private fun expiresAt() = Date(System.currentTimeMillis() + validityInMs)

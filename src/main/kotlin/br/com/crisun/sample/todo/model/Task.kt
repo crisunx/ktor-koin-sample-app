@@ -1,9 +1,11 @@
 package br.com.crisun.sample.todo.model
 
+import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.Serializable
 import java.time.LocalDateTime
 
 @Serializable
+@ExperimentalSerializationApi
 data class Task(
     val id: Long = 0,
     val title: String,
