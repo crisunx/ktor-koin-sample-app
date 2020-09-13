@@ -16,7 +16,7 @@ class TaskRepositoryTest {
     lateinit var jdbcTemplate: JdbcTemplate
 
     @InjectMockKs
-    private lateinit var repository: TaskRepository
+    private lateinit var repository: TaskRepositoryImpl
 
     @Before
     fun setUp() = MockKAnnotations.init(this)

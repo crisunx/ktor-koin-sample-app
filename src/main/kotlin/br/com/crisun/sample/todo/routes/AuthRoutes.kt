@@ -2,13 +2,12 @@ package br.com.crisun.sample.todo.routes
 
 import br.com.crisun.sample.todo.configuration.AuthConfig
 import br.com.crisun.sample.todo.service.UserService
-import io.ktor.application.call
-import io.ktor.http.HttpStatusCode
-import io.ktor.request.receive
-import io.ktor.response.respond
-import io.ktor.routing.Routing
-import io.ktor.routing.post
-import io.ktor.util.KtorExperimentalAPI
+import io.ktor.application.*
+import io.ktor.http.*
+import io.ktor.request.*
+import io.ktor.response.*
+import io.ktor.routing.*
+import io.ktor.util.*
 import org.koin.ktor.ext.inject
 
 @KtorExperimentalAPI

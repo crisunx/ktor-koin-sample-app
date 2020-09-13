@@ -14,7 +14,7 @@ import kotlin.test.assertEquals
 class TaskServiceTest {
 
     @InjectMockKs
-    lateinit var service: TaskService
+    lateinit var service: TaskServiceImpl
 
     @MockK
     private lateinit var repository: TaskRepository

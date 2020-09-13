@@ -3,18 +3,15 @@ package br.com.crisun.sample.todo.routes
 import br.com.crisun.sample.todo.exception.ValidationException
 import br.com.crisun.sample.todo.model.Task
 import br.com.crisun.sample.todo.service.TaskService
-import io.ktor.application.ApplicationCall
-import io.ktor.application.call
-import io.ktor.auth.authenticate
-import io.ktor.http.HttpStatusCode
-import io.ktor.request.receive
-import io.ktor.request.receiveOrNull
-import io.ktor.response.respond
+import io.ktor.application.*
+import io.ktor.auth.*
+import io.ktor.http.*
+import io.ktor.request.*
+import io.ktor.response.*
 import io.ktor.routing.*
-import io.ktor.util.pipeline.PipelineContext
+import io.ktor.util.pipeline.*
 import kotlinx.serialization.ExperimentalSerializationApi
 import org.koin.ktor.ext.inject
-import java.lang.NumberFormatException
 
 @ExperimentalSerializationApi
 fun Routing.todo() {
