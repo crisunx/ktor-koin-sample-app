@@ -13,9 +13,9 @@ import org.koin.ktor.ext.inject
 @KtorExperimentalAPI
 fun Routing.auth() {
     val jwt by inject<AuthConfig>()
-    val service by inject<UserUseCase>()
+    val useCase by inject<UserUseCase>()
 
     post("/user/login") {
-        call.respond(HttpStatusCode.Created, mapOf("token" to jwt.sign(service.findUser(call.receive()))))
+        call.respond(HttpStatusCode.Created, mapOf("token" to jwt.sign(useCase.findUser(call.receive()))))
     }
 }

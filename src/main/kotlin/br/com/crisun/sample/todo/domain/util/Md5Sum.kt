@@ -1,4 +1,4 @@
-package br.com.crisun.sample.todo.application.util
+package br.com.crisun.sample.todo.domain.util
 
 import java.math.BigInteger
 import java.security.MessageDigest

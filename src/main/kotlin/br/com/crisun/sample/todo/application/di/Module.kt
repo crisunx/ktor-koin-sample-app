@@ -3,7 +3,7 @@ package br.com.crisun.sample.todo.application.di
 import br.com.crisun.sample.todo.application.configuration.AuthConfig
 import br.com.crisun.sample.todo.application.configuration.Configuration
 import br.com.crisun.sample.todo.application.configuration.DatabaseConfig
-import br.com.crisun.sample.todo.application.util.Md5Sum
+import br.com.crisun.sample.todo.domain.util.Md5Sum
 import io.ktor.util.*
 import kotlinx.serialization.json.Json
 import org.koin.dsl.module

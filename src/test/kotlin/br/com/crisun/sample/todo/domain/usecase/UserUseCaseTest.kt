@@ -1,10 +1,10 @@
 package br.com.crisun.sample.todo.domain.usecase
 
 import br.com.crisun.sample.todo.application.exception.NotFoundException
-import br.com.crisun.sample.todo.application.util.Md5Sum
-import br.com.crisun.sample.todo.domain.model.LoginRequest
+import br.com.crisun.sample.todo.domain.model.Login
 import br.com.crisun.sample.todo.domain.model.User
 import br.com.crisun.sample.todo.domain.repository.UserRepository
+import br.com.crisun.sample.todo.domain.util.Md5Sum
 import io.mockk.MockKAnnotations
 import io.mockk.every
 import io.mockk.impl.annotations.InjectMockKs
@@ -29,7 +29,7 @@ internal class UserUseCaseTest {
 
     @Test
     fun `Find user in database`() {
-        val request = LoginRequest("crisun", "abc123")
+        val request = Login("crisun", "abc123")
         val expected = User(1, "Cristiano", "crisun", "abc123", emptyList())
 
         every { md5.checksum(request.password) } returns request.password
@@ -44,7 +44,7 @@ internal class UserUseCaseTest {
 
     @Test(expected = NotFoundException::class)
     fun `User not found`() {
-        val request = LoginRequest("crisun", "abc123")
+        val request = Login("crisun", "abc123")
 
         every { md5.checksum(request.password) } returns request.password
         every { repository.findUser(request.username, request.password) } returns null
