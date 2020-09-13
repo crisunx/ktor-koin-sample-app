@@ -5,9 +5,9 @@ import br.com.crisun.sample.todo.data.repository.UserRepositoryImpl
 import br.com.crisun.sample.todo.domain.repository.TaskRepository
 import br.com.crisun.sample.todo.domain.repository.UserRepository
 import org.koin.dsl.module
-import org.koin.experimental.builder.factoryBy
+import org.koin.experimental.builder.singleBy
 
 val dataModule = module {
-    factoryBy<TaskRepository, TaskRepositoryImpl>()
-    factoryBy<UserRepository, UserRepositoryImpl>()
+    singleBy<TaskRepository, TaskRepositoryImpl>()
+    singleBy<UserRepository, UserRepositoryImpl>()
 }
