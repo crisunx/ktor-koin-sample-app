@@ -16,6 +16,6 @@ fun Routing.auth() {
     val useCase by inject<UserUseCase>()
 
     post("/user/login") {
-        call.respond(HttpStatusCode.Created, mapOf("token" to jwt.sign(useCase.findUser(call.receive()))))
+        call.respond(HttpStatusCode.Created, mapOf("token" to jwt.sign(useCase(call.receive()))))
     }
 }

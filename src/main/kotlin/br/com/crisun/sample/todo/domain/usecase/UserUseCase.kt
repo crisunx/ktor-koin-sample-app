@@ -4,5 +4,5 @@ import br.com.crisun.sample.todo.domain.model.Login
 import br.com.crisun.sample.todo.domain.model.User
 
 interface UserUseCase {
-    fun findUser(login: Login): User
+    operator fun invoke(login: Login): User
 }
